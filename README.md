@@ -38,6 +38,12 @@ The tooling focuses on:
    python main.py search --serial-number "151-199"
    ```
 
+5. Quickly look up a card by both serial number and name to view its blended estimate and most recent sales (defaults to the five latest records):
+
+   ```bash
+   python main.py lookup --serial-number "151-199" --name "Charizard ex"
+   ```
+
 ## Data model
 
 The application stores data in a local SQLite database with three tables:

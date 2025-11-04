@@ -8,7 +8,7 @@ from typing import Any
 
 from pokemon_cards.database import Database
 from pokemon_cards.importer import import_cards_from_json
-from pokemon_cards.search import get_card_details, search_cards
+from pokemon_cards.search import get_card_details, lookup_card, search_cards
 
 DEFAULT_DB_PATH = "pokemon_cards.db"
 
@@ -46,6 +46,19 @@ def _build_parser() -> argparse.ArgumentParser:
     detail_parser = subparsers.add_parser("show", help="Show details for a specific card ID")
     detail_parser.add_argument("card_id", type=int, help="Database ID of the card")
 
+    lookup_parser = subparsers.add_parser(
+        "lookup",
+        help="Quickly look up a card by serial number and name to view recent sales",
+    )
+    lookup_parser.add_argument("--serial-number", required=True, help="Exact serial number of the card")
+    lookup_parser.add_argument("--name", required=True, help="Exact card name")
+    lookup_parser.add_argument(
+        "--sales-limit",
+        type=int,
+        default=5,
+        help="Number of recent sales to display (default: 5)",
+    )
+
     return parser
 
 
@@ -72,6 +85,21 @@ def _print_sales(sales: dict[str, list[dict[str, Any]]]) -> None:
             extra = f" | Condition: {condition}" if condition else ""
             extra += f" | Listing: {listing_url}" if listing_url else ""
             print(f"    {date}: ${price:.2f}{extra}")
+
+
+def _print_recent_sales(sales: list[dict[str, Any]]) -> None:
+    if not sales:
+        print("No recent sales found.")
+        return
+    for sale in sales:
+        date = sale.get("date") or "unknown date"
+        price = sale.get("price")
+        source = sale.get("source") or "Unknown source"
+        condition = sale.get("condition")
+        listing_url = sale.get("listing_url")
+        extra = f" | Condition: {condition}" if condition else ""
+        extra += f" | Listing: {listing_url}" if listing_url else ""
+        print(f"- {date}: ${price:.2f} ({source}{extra})")
 
 
 def app(argv: list[str] | None = None) -> None:
@@ -140,6 +168,28 @@ def app(argv: list[str] | None = None) -> None:
         _print_price_sources(details["prices"])
         print("Sales:")
         _print_sales(details["sales"])
+        return
+
+    if args.command == "lookup":
+        db.initialize()
+        summary = lookup_card(
+            db,
+            serial_number=args.serial_number,
+            name=args.name,
+            sales_limit=args.sales_limit,
+        )
+        if summary is None:
+            print("No matching cards found.")
+            return
+        card = summary["card"]
+        print(f"{card.name} ({card.serial_number})")
+        est = summary.get("estimated_value")
+        if est is not None:
+            print(f"Estimated value: ${est:.2f}")
+        else:
+            print("Estimated value: n/a")
+        print("Recent sales:")
+        _print_recent_sales(summary["sales"])
         return
 
     parser.error(f"Unknown command: {args.command}")

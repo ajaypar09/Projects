@@ -226,7 +226,7 @@ class Database:
             )
             return cursor.fetchall()
 
-    def fetch_sales(self, card_id: int) -> list[sqlite3.Row]:
+    def fetch_sales(self, card_id: int, limit: int = 20) -> list[sqlite3.Row]:
         with self.connect() as conn:
             cursor = conn.execute(
                 """
@@ -234,9 +234,9 @@ class Database:
                 FROM sales
                 WHERE card_id = ?
                 ORDER BY (sale_date IS NULL), sale_date DESC, price DESC
-                LIMIT 20
+                LIMIT ?
                 """,
-                (card_id,),
+                (card_id, limit),
             )
             return cursor.fetchall()
 

@@ -76,3 +76,56 @@ def get_card_details(db: Database, card_id: int) -> dict[str, Any] | None:
         "sales": dict(sales),
         "estimated_value": _estimate_value(prices),
     }
+
+
+def lookup_card(
+    db: Database,
+    *,
+    serial_number: str,
+    name: str,
+    sales_limit: int = 5,
+) -> dict[str, Any] | None:
+    """Find a card by identifiers and provide a quick summary."""
+
+    if not serial_number and not name:
+        return None
+
+    candidates = db.search_cards(serial_number=serial_number, name_query=name, limit=50)
+    if not candidates:
+        return None
+
+    serial_lookup = serial_number.lower()
+    name_lookup = name.lower()
+
+    def _match(card: Card) -> bool:
+        return card.serial_number.lower() == serial_lookup and card.name.lower() == name_lookup
+
+    def _serial_match(card: Card) -> bool:
+        return card.serial_number.lower() == serial_lookup
+
+    card = next((candidate for candidate in candidates if _match(candidate)), None)
+    if card is None:
+        card = next((candidate for candidate in candidates if _serial_match(candidate)), candidates[0])
+
+    price_rows = db.fetch_prices(card.id)
+    sales_rows = db.fetch_sales(card.id, limit=max(1, sales_limit))
+
+    prices = _group_prices(price_rows)
+    estimated_value = _estimate_value(prices)
+    sales = [
+        {
+            "source": sale["source"],
+            "date": sale["sale_date"],
+            "price": sale["price"],
+            "condition": sale["condition"],
+            "listing_url": sale["listing_url"],
+        }
+        for sale in sales_rows
+    ]
+
+    return {
+        "card": card,
+        "prices": prices,
+        "sales": sales,
+        "estimated_value": estimated_value,
+    }
