@@ -1,0 +1,17 @@
+[project]
+name = "pokemon-card-price-db"
+version = "0.1.0"
+description = "Simple searchable database for Pokémon card price information aggregated from PriceCharting and TCGplayer"
+authors = [
+  { name = "AI Assistant" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+pokemon-card-db = "main:app"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
