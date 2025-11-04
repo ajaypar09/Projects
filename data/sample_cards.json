@@ -1,0 +1,72 @@
+[
+  {
+    "serial_number": "SM115",
+    "name": "Charizard-GX",
+    "set_name": "Hidden Fates",
+    "rarity": "Ultra Rare",
+    "pricecharting": {
+      "price": 150.0,
+      "last_updated": "2024-01-12",
+      "recent_sales": [
+        { "date": "2024-01-10", "price": 148.0, "source": "PriceCharting" },
+        { "date": "2024-01-08", "price": 152.5, "source": "PriceCharting" }
+      ]
+    },
+    "tcgplayer": {
+      "market_price": 155.0,
+      "listed_median": 160.0,
+      "low_price": 140.0,
+      "last_updated": "2024-01-11",
+      "recent_sales": [
+        { "date": "2024-01-09", "price": 153.0, "source": "TCGplayer", "condition": "Near Mint" },
+        { "date": "2024-01-07", "price": 149.5, "source": "TCGplayer", "condition": "Lightly Played" }
+      ]
+    }
+  },
+  {
+    "serial_number": "SWSH045",
+    "name": "Pikachu V",
+    "set_name": "Shining Fates",
+    "rarity": "Promo",
+    "pricecharting": {
+      "price": 5.75,
+      "last_updated": "2024-01-05",
+      "recent_sales": [
+        { "date": "2024-01-04", "price": 5.5, "source": "PriceCharting" },
+        { "date": "2024-01-03", "price": 6.0, "source": "PriceCharting" }
+      ]
+    },
+    "tcgplayer": {
+      "market_price": 6.25,
+      "listed_median": 6.5,
+      "direct_low": 5.8,
+      "last_updated": "2024-01-05",
+      "recent_sales": [
+        { "date": "2024-01-04", "price": 6.1, "source": "TCGplayer", "condition": "Near Mint" }
+      ]
+    }
+  },
+  {
+    "serial_number": "BS-58",
+    "name": "Machamp",
+    "set_name": "Base Set",
+    "rarity": "Holo Rare",
+    "pricecharting": {
+      "price": 45.0,
+      "loose_price": 22.0,
+      "last_updated": "2024-01-02",
+      "recent_sales": [
+        { "date": "2023-12-30", "price": 44.0, "source": "PriceCharting", "condition": "PSA 8" }
+      ]
+    },
+    "tcgplayer": {
+      "market_price": 47.5,
+      "low_price": 30.0,
+      "last_updated": "2024-01-03",
+      "recent_sales": [
+        { "date": "2023-12-31", "price": 46.5, "source": "TCGplayer", "condition": "Near Mint" },
+        { "date": "2023-12-28", "price": 32.0, "source": "TCGplayer", "condition": "Moderately Played" }
+      ]
+    }
+  }
+]
