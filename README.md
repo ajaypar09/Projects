@@ -35,6 +35,7 @@ The tooling focuses on:
    ```bash
    python main.py search --serial-number "SM115"
    python main.py search --name "charizard"
+   python main.py search --serial-number "151-199"
    ```
 
 ## Data model

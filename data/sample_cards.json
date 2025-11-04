@@ -68,5 +68,29 @@
         { "date": "2023-12-28", "price": 32.0, "source": "TCGplayer", "condition": "Moderately Played" }
       ]
     }
+  },
+  {
+    "serial_number": "151-199",
+    "name": "Charizard ex",
+    "set_name": "Scarlet & Violet 151",
+    "rarity": "Special Illustration Rare",
+    "pricecharting": {
+      "price": 210.0,
+      "last_updated": "2024-02-15",
+      "recent_sales": [
+        { "date": "2024-02-14", "price": 208.5, "source": "PriceCharting", "condition": "PSA 9" },
+        { "date": "2024-02-12", "price": 212.0, "source": "PriceCharting", "condition": "Raw" }
+      ]
+    },
+    "tcgplayer": {
+      "market_price": 215.0,
+      "listed_median": 225.0,
+      "low_price": 199.95,
+      "last_updated": "2024-02-14",
+      "recent_sales": [
+        { "date": "2024-02-13", "price": 214.0, "source": "TCGplayer", "condition": "Near Mint" },
+        { "date": "2024-02-11", "price": 205.0, "source": "TCGplayer", "condition": "Lightly Played" }
+      ]
+    }
   }
 ]
